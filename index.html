@@ -88,11 +88,31 @@
 			/* Hero / banner */
 			.banner {
 				display: grid;
-				grid-template-columns: 1fr auto;
-				align-items: center;
-				gap: 24px;
-				padding: 64px 32px 56px;
+				grid-template-columns: auto 1fr;
+				grid-template-rows: auto auto;
 				border-bottom: 1px solid var(--border-subtle);
+			}
+
+			.banner .app-mark {
+				grid-column: 1;
+				grid-row: 1 / span 2;
+				align-self: center;
+				margin: 48px 48px 48px 32px;
+			}
+
+			.banner-head {
+				grid-column: 2;
+				grid-row: 1;
+				align-self: end;
+				padding: 56px 32px 28px;
+			}
+
+			.banner-body {
+				grid-column: 2;
+				grid-row: 2;
+				padding: 28px 32px 48px;
+				border-top: 1px solid var(--border-subtle);
+				border-left: 1px solid var(--border-subtle);
 			}
 
 			.eyebrow {
@@ -110,7 +130,7 @@
 				font-size: clamp(40px, 6vw, 54px);
 				line-height: 1.07;
 				letter-spacing: 0;
-				margin: 0 0 16px;
+				margin: 0;
 			}
 
 			.subtitle {
@@ -122,8 +142,8 @@
 			}
 
 			.app-mark {
-				width: 96px;
-				height: 96px;
+				width: 132px;
+				height: 132px;
 				border: 1px solid var(--border-subtle);
 				background: #ffffff;
 				display: grid;
@@ -131,8 +151,8 @@
 			}
 
 			.app-mark img {
-				width: 76px;
-				height: 76px;
+				width: 104px;
+				height: 104px;
 				object-fit: contain;
 			}
 
@@ -265,11 +285,27 @@
 			@media (max-width: 720px) {
 				.banner {
 					grid-template-columns: 1fr;
-					padding: 48px 16px 40px;
+					grid-template-rows: auto auto auto;
 				}
 
-				.app-mark {
-					order: -1;
+				.banner .app-mark {
+					grid-column: 1;
+					grid-row: 1;
+					justify-self: start;
+					margin: 40px 16px 0;
+				}
+
+				.banner-head {
+					grid-column: 1;
+					grid-row: 2;
+					padding: 28px 16px 20px;
+				}
+
+				.banner-body {
+					grid-column: 1;
+					grid-row: 3;
+					padding: 20px 16px 40px;
+					border-left: none;
 				}
 
 				.content {
@@ -295,16 +331,18 @@
 			</div>
 
 			<header class="banner">
-				<div>
+				<div class="app-mark">
+					<img src="icon.png" alt="Dynamis app icon" />
+				</div>
+				<div class="banner-head">
 					<p class="eyebrow">Dynamis App</p>
 					<h1>Privacy Policy</h1>
+				</div>
+				<div class="banner-body">
 					<p class="subtitle">
 						Your reading data stays with you. This policy explains what the app
 						stores, what it does not collect, and how optional backups work.
 					</p>
-				</div>
-				<div class="app-mark">
-					<img src="icon.png" alt="Dynamis app icon" />
 				</div>
 			</header>
 
