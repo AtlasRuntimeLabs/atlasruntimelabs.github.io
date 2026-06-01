@@ -95,24 +95,33 @@
 
 			.banner .app-mark {
 				grid-column: 1;
-				grid-row: 1 / span 2;
-				align-self: center;
-				margin: 48px 48px 48px 32px;
+				grid-row: 1;
+				align-self: start;
+				/* top + left gutter only; no bottom/right margin so the frame's
+				   bottom-right corner becomes the divider intersection point */
+				margin: 56px 0 0 56px;
 			}
 
 			.banner-head {
 				grid-column: 2;
 				grid-row: 1;
-				align-self: end;
-				padding: 56px 32px 28px;
+				align-self: center;
+				padding: 56px 48px 32px;
 			}
 
 			.banner-body {
 				grid-column: 2;
 				grid-row: 2;
-				padding: 28px 32px 48px;
+				padding: 24px 28px 32px;
+				/* overlap the logo's bottom-right corner: pull up + left, raise
+				   above the logo on an opaque layer */
+				position: relative;
+				z-index: 2;
+				margin: -48px 0 0 -48px;
+				background: var(--background);
 				border-top: 1px solid var(--border-subtle);
 				border-left: 1px solid var(--border-subtle);
+				box-shadow: -8px -8px 0 0 rgba(22, 22, 22, 0.04);
 			}
 
 			.eyebrow {
@@ -134,16 +143,15 @@
 			}
 
 			.subtitle {
-				font-size: 18px;
-				line-height: 1.55;
+				font-size: 21px;
+				line-height: 1.5;
 				color: var(--text-secondary);
-				max-width: 52ch;
 				margin: 0;
 			}
 
 			.app-mark {
-				width: 132px;
-				height: 132px;
+				width: 248px;
+				height: 248px;
 				border: 1px solid var(--border-subtle);
 				background: #ffffff;
 				display: grid;
@@ -151,8 +159,8 @@
 			}
 
 			.app-mark img {
-				width: 104px;
-				height: 104px;
+				width: 212px;
+				height: 212px;
 				object-fit: contain;
 			}
 
@@ -250,6 +258,34 @@
 				line-height: 1.43;
 			}
 
+			/* Structured list (Carbon spec table) */
+			.spec {
+				margin: 28px 0 0;
+				border-top: 1px solid var(--border-strong);
+			}
+
+			.spec-row {
+				display: grid;
+				grid-template-columns: 220px 1fr;
+				gap: 24px;
+				padding: 16px 0;
+				border-bottom: 1px solid var(--border-subtle);
+			}
+
+			.spec dt {
+				font-weight: 600;
+				font-size: 14px;
+				line-height: 1.5;
+				color: var(--text-primary);
+			}
+
+			.spec dd {
+				margin: 0;
+				font-size: 16px;
+				line-height: 1.5;
+				color: var(--text-secondary);
+			}
+
 			/* Footer */
 			footer {
 				padding: 40px 32px 56px;
@@ -263,6 +299,13 @@
 				letter-spacing: 0.32px;
 				text-transform: uppercase;
 				color: var(--text-helper);
+			}
+
+			footer .footer-note {
+				margin: 0;
+				font-size: 16px;
+				color: var(--text-secondary);
+				line-height: 1.5;
 			}
 
 			footer a {
@@ -305,7 +348,9 @@
 					grid-column: 1;
 					grid-row: 3;
 					padding: 20px 16px 40px;
+					margin: 0;
 					border-left: none;
+					box-shadow: none;
 				}
 
 				.content {
@@ -314,6 +359,11 @@
 
 				.tile {
 					padding: 32px 16px;
+				}
+
+				.spec-row {
+					grid-template-columns: 1fr;
+					gap: 4px;
 				}
 
 				footer {
@@ -340,47 +390,64 @@
 				</div>
 				<div class="banner-body">
 					<p class="subtitle">
-						Your reading data stays with you. This policy explains what the app
-						stores, what it does not collect, and how optional backups work.
+						This Privacy Policy describes how the Dynamis application
+						(&ldquo;the App&rdquo;) handles your information, including the data
+						stored on your device, the information the App does not collect, and
+						the operation of the optional backup feature.
 					</p>
 				</div>
 			</header>
 
 			<main class="content">
 				<section class="tile">
-					<h2>Local Data Only</h2>
+					<h2>On-Device Data Storage</h2>
 					<p>
-						Dynamis stores reading progress, preferences, and related settings
-						locally on your device. This information never leaves your device
+						Dynamis stores your reading progress, preferences, and related
+						settings locally on your device. This information remains on your
+						device and is not transmitted to the developer or any third party
 						unless you explicitly enable cloud backup.
 					</p>
 					<div class="tags">
 						<span class="tag">On-device storage</span>
 						<span class="tag">User-controlled</span>
-						<span class="tag">No hidden sync</span>
+						<span class="tag">No background sync</span>
 					</div>
 				</section>
 
 				<section class="tile">
-					<h2>No Ads, No Tracking</h2>
+					<h2>No Advertising or Tracking</h2>
 					<p>
-						Dynamis does not use advertising, analytics, or tracking services.
-						The app is built to focus on your reading, not your data.
+						Dynamis does not incorporate advertising, analytics, or tracking
+						technologies of any kind. The application is designed to operate
+						without collecting information about your usage or behavior.
 					</p>
 				</section>
 
 				<section class="tile full">
-					<h2>Google Drive Backups</h2>
+					<h2>Optional Google Drive Backups</h2>
 					<p>
-						The app offers an optional backup and restore feature using Google
-						Drive. When you turn this on, your backup data is stored in your own
-						Google Drive account.
+						Dynamis offers an optional backup and restore feature powered by
+						Google Drive. The feature is disabled by default and, when enabled,
+						operates entirely within your own Google Drive account.
 					</p>
-					<p>
-						The developer does not collect, access, store, transmit, or share
-						the contents of these backups. Google Drive access is used solely to
-						create or restore backups at your request.
-					</p>
+					<dl class="spec">
+						<div class="spec-row">
+							<dt>Storage location</dt>
+							<dd>Your personal Google Drive account</dd>
+						</div>
+						<div class="spec-row">
+							<dt>Developer access</dt>
+							<dd>None &mdash; backup contents are never read, stored, or shared</dd>
+						</div>
+						<div class="spec-row">
+							<dt>Scope of access</dt>
+							<dd>Limited to creating and restoring the backups you request</dd>
+						</div>
+						<div class="spec-row">
+							<dt>Default state</dt>
+							<dd>Disabled until you choose to turn it on</dd>
+						</div>
+					</dl>
 					<div class="notification" role="note">
 						<svg width="20" height="20" viewBox="0 0 32 32" aria-hidden="true">
 							<path d="M16,2A14,14,0,1,0,30,16,14,14,0,0,0,16,2Zm0,26A12,12,0,1,1,28,16,12,12,0,0,1,16,28Z"/>
@@ -388,8 +455,8 @@
 							<path d="M16,14a1,1,0,0,0-1,1v7a1,1,0,0,0,2,0V15A1,1,0,0,0,16,14Z"/>
 						</svg>
 						<p>
-							You stay in control. Backup access is only used when you choose to
-							back up or restore.
+							You may disable backups or remove stored backup data at any time
+							from within the App.
 						</p>
 					</div>
 				</section>
@@ -397,6 +464,9 @@
 
 			<footer>
 				<span class="label">Contact</span>
+				<p class="footer-note">
+					For questions regarding this Privacy Policy, please contact:
+				</p>
 				<a href="mailto:atlas.at.runtime@gmail.com">atlas.at.runtime@gmail.com</a>
 				<span class="meta">Last updated: June 1, 2026</span>
 			</footer>
